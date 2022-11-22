@@ -8,7 +8,9 @@ namespace BankOfEdugrade
     {
         public Admin()
         {
-
+            this.name = "admin";
+            this.id = "1";
+            this.password = "password";
         }
     }
 }

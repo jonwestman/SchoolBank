@@ -8,10 +8,20 @@ namespace BankOfEdugrade
     {
         private uint _accountNumber { get; set; }
         private double _amount { get; set; }
-        public Customer()
+        public Customer (string name, string id, string password, uint accountNumber)
         {
 
         }
+        public Customer()
+        {
+            
+        }
+        public double amount
+        {
+            get { return _amount; }
+            set { _amount = value; }
+        }
+
 
     }
 }
