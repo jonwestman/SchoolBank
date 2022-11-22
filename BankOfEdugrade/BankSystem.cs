@@ -67,7 +67,7 @@ namespace BankOfEdugrade
                 do
                 {
                     Console.Clear();
-                    string[] menu = new string[8] { "1: View Amount on all Accounts", "2: Transfer money between Accounts", "3: Transfer money to Other Customers", "4: Open new Account", "5: View Amount in Other Currency", "6: Open Savings Account", "7: Apply for Loan", "8: View all you transactions" };
+                    string[] menu = new string[9] { "1: View Amount on all Accounts", "2: Transfer money between Accounts", "3: Transfer money to Other Customers", "4: Open new Account", "5: View Amount in Other Currency", "6: Open Savings Account", "7: Apply for Loan", "8: View all you transactions", "9: Quit" };
 
                     for (int i = 0; i < menu.Length; i++)
                     {
@@ -77,7 +77,7 @@ namespace BankOfEdugrade
 
                 } while (!uint.TryParse(menuInput, out approvedInput));
 
-            } while (approvedInput >= 9);
+            } while (approvedInput >= 10);
 
             Console.Clear();
 
