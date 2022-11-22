@@ -10,7 +10,10 @@ namespace BankOfEdugrade
         private double _amount { get; set; }
         public Customer (string name, string id, string password, uint accountNumber)
         {
-
+            this.name = name;
+            this.id = id;
+            this.password = password;
+            this._accountNumber = accountNumber;
         }
         public Customer()
         {
