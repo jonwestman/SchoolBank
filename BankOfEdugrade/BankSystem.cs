@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Figgle;
 
 namespace BankOfEdugrade
 {
@@ -14,12 +15,12 @@ namespace BankOfEdugrade
         public static void Login()
         {
 
-            //Method for checking logging in and checking credentials
+            //Method for checking login and checking credentials
 
             string userName, passWord;
             int ctr = 0;
 
-            Console.WriteLine("Welcome");
+            Console.WriteLine(FiggleFonts.Fender.Render("Bank Of Edugrade"));
             Console.WriteLine("Please log in using Username and Password");
             Console.WriteLine("Default Username and Password is: abcd and 1234");
             Console.WriteLine("---------------------------------------------------");
