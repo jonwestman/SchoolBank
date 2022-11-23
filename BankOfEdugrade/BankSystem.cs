@@ -7,11 +7,6 @@ namespace BankOfEdugrade
 {
     class BankSystem
     {
-        public BankSystem()
-        {
-
-        }
-       
         public static void Login()
         {
 
@@ -50,7 +45,7 @@ namespace BankOfEdugrade
             }
             else
             {
-                Console.WriteLine("Login Successfull");
+                //Login was successfull
                 Menu();
             }
         }
