@@ -28,7 +28,7 @@ namespace BankOfEdugrade
                 Console.Write("Password: ");
                 passWord = Console.ReadLine();
 
-                if (userName != "abcd" || passWord != "1234")
+                if (userName != "admin" || passWord != "1234")
                 {
                     ctr++;
                 }
@@ -37,7 +37,7 @@ namespace BankOfEdugrade
                     ctr = 1;
                 }
 
-            } while ((userName != "abcd" || passWord != "1234") && (ctr != 3));
+            } while ((userName != "admin" || passWord != "1234") && (ctr != 3));
 
             if (ctr == 3)
             {
@@ -136,7 +136,7 @@ namespace BankOfEdugrade
                 do
                 {
                     Console.Clear();
-                    string[] menu = new string[3] {"1: Skapa nya användare", "2: Uppdatera växelkurs", "3: Redigera användare"};
+                    string[] menu = new string[3] {"1: Create new user", "2: Update currency exchange rate", "3: Edit user"};
 
                     for (int i = 0; i < menu.Length; i++)
                     {
@@ -147,6 +147,34 @@ namespace BankOfEdugrade
                 } while (!uint.TryParse(menuInput, out approvedInput));
 
             } while (approvedInput >= 4);
+
+            AdminSwitchMenu(approvedInput);
+        }
+        public static void AdminSwitchMenu(uint approvedInput)
+        {
+            switch (approvedInput)
+            {
+                case 1:
+                    Console.WriteLine("Create new user");
+                    Console.WriteLine();
+
+                    Console.Write("Input username: ");
+                    string userName = Console.ReadLine();
+
+                    Console.WriteLine();
+                    Console.Write("Input Initial Balance: ");
+                    decimal initalBalance = decimal.Parse(Console.ReadLine());
+                    var account = new BankAccount(userName,initalBalance);
+
+                    Console.WriteLine($"Account {account.Number} was created for {account.Owner} with {account.Balance} inital balance.");
+                    break;
+                case 2:
+                    Console.WriteLine("Update currency exchange rate");
+                    break;
+                case 3:
+                    Console.WriteLine("Edit user");
+                    break;
+            }
         }
     }
 }

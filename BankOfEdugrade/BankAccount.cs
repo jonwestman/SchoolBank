@@ -6,13 +6,17 @@ namespace BankOfEdugrade
 {
     public class BankAccount
     {
+        private static uint accountNumberSeed = 1234567890;
         public string Number { get;}
         public string Owner { get; set; }
         public decimal Balance { get; }
 
-        public BankAccount()
+        public BankAccount(string name, decimal initalBalance)
         {
-
+            this.Owner = name;
+            this.Balance = initalBalance;
+            this.Number = accountNumberSeed.ToString();
+            accountNumberSeed++;
         }
 
         public void MakeDeposit(decimal amount, DateTime date, string note)
