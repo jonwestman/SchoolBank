@@ -6,7 +6,6 @@ namespace BankOfEdugrade
 {
     public class BankAccount
     {
-        private static uint accountNumberSeed = 1234567890;
         public string Number { get; }
         public string Owner { get; set; }
         public decimal Balance
@@ -22,14 +21,21 @@ namespace BankOfEdugrade
                 return balance;
             }
         }
+        private static uint s_accountNumberSeed = 1234567890;
 
-        public BankAccount(string name, decimal initialBalance)
+        private readonly decimal _minimumBalance;
+
+        public BankAccount(string name, decimal initialBalance) : this(name, initialBalance, 0) { }
+
+        public BankAccount(string name, decimal initialBalance, decimal minimumBalance)
         {
-            this.Number = accountNumberSeed.ToString();
-            accountNumberSeed++;
+            Number = s_accountNumberSeed.ToString();
+            s_accountNumberSeed++;
 
-            this.Owner = name;
-            MakeDeposit(initialBalance, DateTime.Now, "Inital balance");
+            Owner = name;
+            _minimumBalance = minimumBalance;
+            if (initialBalance > 0)
+                MakeDeposit(initialBalance, DateTime.Now, "Initial balance");
         }
 
         private List<Transaction> allTransactions = new List<Transaction>();

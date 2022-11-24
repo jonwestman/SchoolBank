@@ -10,5 +10,15 @@ namespace BankOfEdugrade
         {
 
         }
+
+        public override void PerformMonthEndTransactions()
+        {
+            if (Balance < 0)
+            {
+                //Negate the balance to get a positive interest charge;
+                decimal interest = -Balance * 0.07m;
+                MakeWithdrawal(interest,DateTime.Now, "Carge monthly interest");
+            }
+        }
     }
 }
