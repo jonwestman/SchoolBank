@@ -126,6 +126,7 @@ namespace BankOfEdugrade
                     break;
             }
         }
+
         public static void AdminMenu()
         {
             uint approvedInput;
@@ -148,8 +149,10 @@ namespace BankOfEdugrade
 
             } while (approvedInput >= 4);
 
+            //Calling Admin Switch Menu
             AdminSwitchMenu(approvedInput);
         }
+        //Menu when you log in as admin
         public static void AdminSwitchMenu(uint approvedInput)
         {
             switch (approvedInput)
@@ -164,6 +167,7 @@ namespace BankOfEdugrade
                     Console.WriteLine();
                     Console.Write("Input Initial Balance: ");
                     decimal initalBalance = decimal.Parse(Console.ReadLine());
+
                     var account = new BankAccount(userName,initalBalance);
 
                     Console.WriteLine($"Account {account.Number} was created for {account.Owner} with {account.Balance} inital balance.");
