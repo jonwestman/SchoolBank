@@ -25,10 +25,11 @@ namespace BankOfEdugrade
 
         public BankAccount(string name, decimal initalBalance)
         {
-            this.Owner = name;
-            this.Balance = initalBalance;
             this.Number = accountNumberSeed.ToString();
             accountNumberSeed++;
+
+            this.Owner = name;
+            MakeDeposit(initalBalance, DateTime.Now, "Inital balance");
         }
 
         private List<Transaction> allTransactions = new List<Transaction>();
@@ -55,6 +56,20 @@ namespace BankOfEdugrade
             }
             var withdrawal = new Transaction(-amount, date, note);
             allTransactions.Add(withdrawal);
+        }
+
+        public string GetAccountHistory()
+        {
+            var report = new System.Text.StringBuilder();
+
+            decimal balance = 0;
+            report.AppendLine("Date\tAmount\tBalance\tNote");
+            foreach (var item in allTransactions)
+            {
+                balance += item.Amount;
+                report.AppendLine($"{item.Date.ToShortDateString()}\t{item.Amount}\t{balance}\t{item.Notes}");
+            }
+            return report.ToString();
         }
     }
 }
