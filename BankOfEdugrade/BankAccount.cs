@@ -23,13 +23,13 @@ namespace BankOfEdugrade
             }
         }
 
-        public BankAccount(string name, decimal initalBalance)
+        public BankAccount(string name, decimal initialBalance)
         {
             this.Number = accountNumberSeed.ToString();
             accountNumberSeed++;
 
             this.Owner = name;
-            MakeDeposit(initalBalance, DateTime.Now, "Inital balance");
+            MakeDeposit(initialBalance, DateTime.Now, "Inital balance");
         }
 
         private List<Transaction> allTransactions = new List<Transaction>();
@@ -71,5 +71,7 @@ namespace BankOfEdugrade
             }
             return report.ToString();
         }
+
+        public virtual void PerformMonthEndTransactions() { }
     }
 }
