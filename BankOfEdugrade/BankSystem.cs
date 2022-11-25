@@ -161,12 +161,22 @@ namespace BankOfEdugrade
                     Console.WriteLine("Create new user");
                     Console.WriteLine();
 
-                    Console.Write("Input username: ");
-                    string userName = Console.ReadLine();
+                    string userName, initialInput;
+                    decimal initialBalance;
+
+                    do
+                    {
+                        Console.Write("Input username: ");
+                        userName = Console.ReadLine();
+                    } while (userName == null);
 
                     Console.WriteLine();
-                    Console.Write("Input Initial Balance: ");
-                    decimal initalBalance = decimal.Parse(Console.ReadLine());
+
+                    do
+                    {
+                        Console.Write("Input Initial Balance: ");
+                        initialInput = Console.ReadLine();
+                    } while (!decimal.TryParse(initialInput, out initialBalance));
 
                     Console.ReadKey();
                     break;
