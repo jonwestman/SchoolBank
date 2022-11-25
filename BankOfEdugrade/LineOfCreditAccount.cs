@@ -20,9 +20,5 @@ namespace BankOfEdugrade
                 MakeWithdrawal(interest, DateTime.Now, "Carge monthly interest");
             }
         }
-        protected override Transaction? CheckWithdrawalLimit(bool isOverdrawn) =>
-    isOverdrawn
-    ? new Transaction(-20, DateTime.Now, "Apply overdraft fee")
-    : default;
     }
 }

@@ -55,23 +55,12 @@ namespace BankOfEdugrade
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "Amount of withdrawal must be positive");
             }
-            Transaction? overdraftTransaction = CheckWithdrawalLimit(Balance - amount < _minimumBalance);
-            Transaction? withdrawal = new(-amount, date, note);
-            _allTransactions.Add(withdrawal);
-            if (overdraftTransaction != null)
-                _allTransactions.Add(overdraftTransaction);
-        }
-
-        protected virtual Transaction? CheckWithdrawalLimit(bool isOverdrawn)
-        {
-            if (isOverdrawn)
+            if (Balance - amount < _minimumBalance)
             {
                 throw new InvalidOperationException("Not sufficient funds for this withdrawal");
             }
-            else
-            {
-                return default;
-            }
+            var withdrawal = new Transaction(-amount, date, note);
+            _allTransactions.Add(withdrawal);
         }
 
         public string GetAccountHistory()
