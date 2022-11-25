@@ -168,16 +168,6 @@ namespace BankOfEdugrade
                     Console.Write("Input Initial Balance: ");
                     decimal initalBalance = decimal.Parse(Console.ReadLine());
 
-                    var account = new BankAccount(userName,initalBalance);
-
-                    Console.WriteLine($"Account {account.Number} was created for {account.Owner} with {account.Balance} inital balance.");
-
-                    account.MakeWithdrawal(500, DateTime.Now, "Rent payment");
-                    Console.WriteLine(account.Balance);
-                    account.MakeDeposit(100, DateTime.Now, "Friend paid me back");
-                    Console.WriteLine(account.Balance);
-
-                    Console.WriteLine(account.GetAccountHistory());
                     Console.ReadKey();
                     break;
                 case 2:
