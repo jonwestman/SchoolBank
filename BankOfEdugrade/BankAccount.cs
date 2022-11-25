@@ -13,7 +13,7 @@ namespace BankOfEdugrade
             get
             {
                 decimal balance = 0;
-                foreach (var item in allTransactions)
+                foreach (var item in _allTransactions)
                 {
                     balance += item.Amount;
                 }
@@ -24,7 +24,6 @@ namespace BankOfEdugrade
         private static uint s_accountNumberSeed = 1234567890;
 
         private readonly decimal _minimumBalance;
-
         public BankAccount(string name, decimal initialBalance) : this(name, initialBalance, 0) { }
 
         public BankAccount(string name, decimal initialBalance, decimal minimumBalance)
@@ -38,7 +37,7 @@ namespace BankOfEdugrade
                 MakeDeposit(initialBalance, DateTime.Now, "Initial balance");
         }
 
-        private List<Transaction> allTransactions = new List<Transaction>();
+        private List<Transaction> _allTransactions = new List<Transaction>();
 
         public void MakeDeposit(decimal amount, DateTime date, string note)
         {
@@ -47,7 +46,7 @@ namespace BankOfEdugrade
                 throw new ArgumentOutOfRangeException(nameof(amount), "Amount of deposit must be positive");
             }
             var deposit = new Transaction(amount, date, note);
-            allTransactions.Add(deposit);
+            _allTransactions.Add(deposit);
         }
 
         public void MakeWithdrawal(decimal amount, DateTime date, string note)
@@ -56,12 +55,23 @@ namespace BankOfEdugrade
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "Amount of withdrawal must be positive");
             }
-            if (Balance - amount < 0)
+            Transaction? overdraftTransaction = CheckWithdrawalLimit(Balance - amount < _minimumBalance);
+            Transaction? withdrawal = new(-amount, date, note);
+            _allTransactions.Add(withdrawal);
+            if (overdraftTransaction != null)
+                _allTransactions.Add(overdraftTransaction);
+        }
+
+        protected virtual Transaction? CheckWithdrawalLimit(bool isOverdrawn)
+        {
+            if (isOverdrawn)
             {
                 throw new InvalidOperationException("Not sufficient funds for this withdrawal");
             }
-            var withdrawal = new Transaction(-amount, date, note);
-            allTransactions.Add(withdrawal);
+            else
+            {
+                return default;
+            }
         }
 
         public string GetAccountHistory()
@@ -70,7 +80,7 @@ namespace BankOfEdugrade
 
             decimal balance = 0;
             report.AppendLine("Date\tAmount\tBalance\tNote");
-            foreach (var item in allTransactions)
+            foreach (var item in _allTransactions)
             {
                 balance += item.Amount;
                 report.AppendLine($"{item.Date.ToShortDateString()}\t{item.Amount}\t{balance}\t{item.Notes}");
