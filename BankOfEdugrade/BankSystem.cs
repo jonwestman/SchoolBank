@@ -9,6 +9,7 @@ namespace BankOfEdugrade
     {
         public static void Login()
         {
+            var bankAccount = new BankAccount("admin", "password");
 
             //Method for checking login and checking credentials
 
@@ -161,7 +162,7 @@ namespace BankOfEdugrade
                     Console.WriteLine("Create new user");
                     Console.WriteLine();
 
-                    string userName, initialInput;
+                    string userName, initialInput, passWord;
                     decimal initialBalance;
 
                     do
@@ -174,9 +175,19 @@ namespace BankOfEdugrade
 
                     do
                     {
+                        Console.Write("Input username: ");
+                        passWord = Console.ReadLine();
+                    } while (passWord == null);
+
+                    Console.WriteLine();
+
+                    do
+                    {
                         Console.Write("Input Initial Balance: ");
                         initialInput = Console.ReadLine();
                     } while (!decimal.TryParse(initialInput, out initialBalance));
+
+                    var bankAccount = new BankAccount(userName, passWord, initialBalance);
 
                     Console.ReadKey();
                     break;
