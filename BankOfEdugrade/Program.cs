@@ -10,7 +10,7 @@ namespace BankOfEdugrade
     {
         static void Main(string[] args)
         {
-            BankSystem.Login();
+           
         }
     }
 }
