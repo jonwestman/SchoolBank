@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BankOfEdugrade
 {
-    public class InterestEarningAccount : BankAccount
+    public class InterestEarningAccount /*: BankAccount*/
     {
     }
 }
