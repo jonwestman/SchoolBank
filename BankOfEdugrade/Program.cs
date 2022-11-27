@@ -10,7 +10,12 @@ namespace BankOfEdugrade
     {
         static void Main(string[] args)
         {
-           
+            //displaying bank logo
+            BankSystem.BankLogo();
+
+            //Logging in to system with user credentials
+            BankSystem.LoginMenu();
+
         }
     }
 }
